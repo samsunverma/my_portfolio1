@@ -50,3 +50,22 @@ document.getElementById("contactForm").addEventListener("submit", function(event
         alert("Form successfully submitted!");
     }
 });
+
+const getLocationButton = document.getElementById('getLocation');
+const locationDisplay = document.getElementById('locationDisplay');
+
+getLocationButton.addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        locationDisplay.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+      },
+      (error) => {
+        locationDisplay.textContent = "Location access denied.";
+      }
+    );
+  } else {
+    locationDisplay.textContent = "Geolocation is not supported by your browser.";
+  }
+});
