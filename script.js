@@ -69,3 +69,23 @@ getLocationButton.addEventListener('click', () => {
     locationDisplay.textContent = "Geolocation is not supported by your browser.";
   }
 });
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const typed = new Typed('#typed-element', {
+      strings: [
+        "a Web Developer.", 
+        "a Frontend Enthusiast.", 
+        "passionate about JavaScript.", 
+        "building interactive UIs."
+      ],
+      typeSpeed: 50, // Speed of typing
+      backSpeed: 25, // Speed of backspacing
+      backDelay: 1000, // Pause before deleting
+      startDelay: 500, // Delay before starting
+      loop: true, // Loop the animation
+      showCursor: true, // Display the blinking cursor
+      cursorChar: '|', // Character for the cursor
+    });
+  });
+</script>

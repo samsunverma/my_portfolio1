@@ -1,4 +1,21 @@
+html {
+    scroll-behavior: smooth;
+  }
 
+  section {
+    height: 50vh;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: purple;
+    width: 100%;
+    padding: 0px;
+  }
 
 /* General Styles */
 body {
