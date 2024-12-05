@@ -1,47 +1,24 @@
-html {
-    scroll-behavior: smooth;
-  }
-
-  section {
-    height: 50vh;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: purple;
-    width: 100%;
-    padding: 0px;
-  }
-
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     line-height: 1.6;
+    background-color: #f10303;
 }
 
-header, footer {
+/* Header */
+header {
     background-color: #333;
     color: white;
-    text-align: center;
     padding: 20px;
-}
-
-
-
-nav ul li a:hover {
-    text-decoration: underline;
+    text-align: center;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -54,39 +31,16 @@ nav ul li a {
     text-decoration: none;
 }
 
+/* Section Styles */
 section {
     padding: 20px;
     margin: 20px;
-    background-color: white;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    color: #333;
-}
-
-.project {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-.project h3 {
-    margin: 0;
-    padding-bottom: 10px;
-}
-.project-details {
-    display: none; /* Hide details by default */
-    margin-top: 10px;
-}
-.toggle-button {
-    padding: 5px 10px;
-    cursor: pointer;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 5px;
+/* Footer */
 footer {
     background-color: #333;
     color: white;
@@ -95,7 +49,9 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-size: 14px;
 }
+
 /* Media Queries for Mobile Devices */
 @media only screen and (max-width: 600px) {
     header, footer {
@@ -113,9 +69,36 @@ footer {
         margin: 10px;
     }
 }
+#hero {
+    text-align: center;
+    padding: 50px;
+    background-color: #007bff;
+    color: white;
+    margin-bottom: 20px;
+}
+html {
+    scroll-behavior: smooth;
+}
 
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    display: none; /* Hidden by default, will show when error occurs */
+.dark-mode {
+    background-color: #333;
+    color: #afcca2;
+}
+
+.project {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 5s ease, transform 5s ease;
+}
+
+.project.visible {
+    opacity: 5;
+    transform: translateY(0);
+}
+
+selector {
+    background-image: url('image/sam.jpg');
+    background-size: cover; /* Adjusts the image to cover the entire element */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
 }

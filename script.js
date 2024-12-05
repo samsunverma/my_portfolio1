@@ -1,91 +1,75 @@
+const toggleButtons = document.querySelectorAll('.toggle-details');
 
-console.log("JavaScript is linked and loaded!");
+toggleButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const details = this.nextElementSibling;
 
-const toggleButtons = document.querySelectorAll(".toggle-button");
-
-toggleButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        
-        const projectDetails = button.nextElementSibling;
-        
-        if (projectDetails.style.display === "none" || projectDetails.style.display === "") {
-            projectDetails.style.display = "block";
-            button.textContent = "Hide Details";
+        if (details.style.display === 'none' || !details.style.display) {
+            details.style.display = 'block';
+            this.textContent = 'Hide Details';
         } else {
-            projectDetails.style.display = "none";
-            button.textContent = "Show Details";
+            details.style.display = 'none';
+            this.textContent = 'Show Details';
         }
     });
 });
 
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+const contactForm = document.getElementById('contactForm');
+const feedback = document.getElementById('formFeedback');
 
-    document.getElementById("nameError").textContent = '';
-    document.getElementById("emailError").textContent = '';
-    document.getElementById("messageError").textContent = '';
+contactForm.addEventListener('submit', function (event) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-    let isValid = true;
-
-    let name = document.getElementById("name").value;
-    if (name.trim() === "") {
-        document.getElementById("nameError").textContent = "Name is required.";
-        isValid = false;
-    }
-
-    let email = document.getElementById("email").value;
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email.match(emailRegex)) {
-        document.getElementById("emailError").textContent = "Please enter a valid email address.";
-        isValid = false;
-    }
-
-    let message = document.getElementById("message").value;
-    if (message.trim() === "") {
-        document.getElementById("messageError").textContent = "Message cannot be empty.";
-        isValid = false;
-    }
-
-    if (isValid) {
-        alert("Form successfully submitted!");
+    if (!name || !email || !message) {
+        feedback.style.display = 'block';
+        event.preventDefault(); // Prevent form submission
+    } else {
+        feedback.style.display = 'none';
+        alert('Form submitted successfully!');
     }
 });
 
-const getLocationButton = document.getElementById('getLocation');
-const locationDisplay = document.getElementById('locationDisplay');
-
-getLocationButton.addEventListener('click', () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        locationDisplay.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
-      },
-      (error) => {
-        locationDisplay.textContent = "Location access denied.";
-      }
-    );
-  } else {
-    locationDisplay.textContent = "Geolocation is not supported by your browser.";
+navigator.geolocation.getCurrentPosition(
+  function (position) {
+      const { latitude, longitude } = position.coords;
+      alert(`Your current location is: Latitude ${latitude}, Longitude ${longitude}`);
+  },
+  function () {
+      alert('Location access denied.');
   }
+);
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
 });
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const typed = new Typed('#typed-element', {
-      strings: [
-        "a Web Developer.", 
-        "a Frontend Enthusiast.", 
-        "passionate about JavaScript.", 
-        "building interactive UIs."
-      ],
-      typeSpeed: 50, // Speed of typing
-      backSpeed: 25, // Speed of backspacing
-      backDelay: 1000, // Pause before deleting
-      startDelay: 500, // Delay before starting
-      loop: true, // Loop the animation
-      showCursor: true, // Display the blinking cursor
-      cursorChar: '|', // Character for the cursor
+const toggleThemeButton = document.getElementById('toggleTheme');
+toggleThemeButton.addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme); // Save user preference
+});
+
+// Load saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
+
+const projects = document.querySelectorAll('.project');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
     });
-  });
-</script>
+});
+
+projects.forEach(project => observer.observe(project));
